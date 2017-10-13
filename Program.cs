@@ -32,11 +32,9 @@ namespace GLS {
             if (action != null) {
                 Log.LogDebug("Running action {0}.", action.Action);
                 action.Run();
-            } else {
-                Console.WriteLine("No action specified.");
-                Console.WriteLine("Use the \"--help\" command line argument to find more information.");
-            }
+            } 
             loggerFactory.Dispose();
+            Console.WriteLine();
         }
     }
 

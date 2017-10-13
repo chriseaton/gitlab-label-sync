@@ -1,4 +1,8 @@
 using System;
+using System.Security;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Logging;
+using GLS.GitLab;
 
 namespace GLS.Command {
 
@@ -10,7 +14,7 @@ namespace GLS.Command {
 
         public string URL { get; protected set; }
 
-        public string Token { get; protected set; }
+        public SecureString Token { get; protected set; }
 
         public bool Save { get; protected set; }
 
@@ -20,7 +24,7 @@ namespace GLS.Command {
 
         public RegisterAction() { }
 
-        public RegisterAction(string url, string token, bool save) {
+        public RegisterAction(string url, SecureString token, bool save) {
             this.URL = url;
             this.Token = token;
             this.Save = save;
@@ -31,7 +35,8 @@ namespace GLS.Command {
         #region " Methods "
 
         public bool Run() {
-            //TODO
+            GitLabConnection conn = new GitLabConnection(this.URL, this.Token);
+            conn.Test();
             return true;
         }
 

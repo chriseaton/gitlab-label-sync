@@ -12,9 +12,9 @@ This utility is built with .NET Core v2 and is supported on Linux, Windows, and 
 ## Operations
 
 ### Registering
-★ Before you can use any of the commands, you must register your GitLab account. At the moment, only private or personal access tokens may be used.
+★ Before you can use any of the commands, you must register your GitLab account. At the moment, only private or personal access tokens can be used.
 
-You may choose to save the credentials to an encrypted local file if you wish using the optional ```--save``` argument
+You may choose to save the credentials by using the optional ```--save``` argument. The token and URL will be saved to disk and used automatically when the tool is run.
 ```
 gls register {gitlab url} {token} {--save}
 ```
