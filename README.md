@@ -3,6 +3,11 @@ This small CLI utility makes it easy to synchronize and manage labels in GitLab.
 
 This utility is built with .NET Core v2 and is supported on Linux, Windows, and Mac. If you discover an issue, please consider contributing to this project, or reporting it [here](https://github.com/chriseaton/gitlab-label-sync/issues).
 
+# !! PROJECT ON HOLD
+Apparently GitLab has not completed an API for group or admin labels yet, making this initiative impossible. Please see the GitLab issues here and make your voices heard:
+1. Provide API support for Group Labels [Issue 24156](https://gitlab.com/gitlab-org/gitlab-ce/issues/24156)
+2. Create API requests for admin labels [Issue 17473](https://gitlab.com/gitlab-org/gitlab-ce/issues/17473)
+
 ## Installation
 
 ### Option 1: Download Binary
