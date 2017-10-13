@@ -18,12 +18,21 @@ namespace GLS.Command {
 
         #region " Constructor(s) "
 
-        public RegisterAction() {}
+        public RegisterAction() { }
 
         public RegisterAction(string url, string token, bool save) {
             this.URL = url;
             this.Token = token;
             this.Save = save;
+        }
+
+        #endregion
+
+        #region " Methods "
+
+        public bool Run() {
+            //TODO
+            return true;
         }
 
         #endregion

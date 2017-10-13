@@ -12,7 +12,16 @@ namespace GLS.Command {
 
         #region " Constructor(s) "
 
-        public RemoveAction() {}
+        public RemoveAction() { }
+
+        #endregion
+
+        #region " Methods "
+
+        public bool Run() {
+            //TODO
+            return true;
+        }
 
         #endregion
 

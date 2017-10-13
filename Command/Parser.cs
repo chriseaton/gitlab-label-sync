@@ -1,3 +1,6 @@
+using System;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Logging;
 
 namespace GLS.Command {
 
@@ -5,7 +8,57 @@ namespace GLS.Command {
 
         #region " Static Methods "
 
+        /// <summary>
+        /// Extracts the logging level from the CLI arguments, if present.
+        /// This argument must be the first in the array and must be a valid LogLevel enum name.
+        /// </summary>
+        /// <param name="args">The CLI arguments.</param>
+        /// <param name="logLevel">The discovered LogLevel value (defaults to "Error").</param>
+        /// <returns>The CLI argument array minus the log level argument.</returns>
+        public static string[] FilterLogLevel(string[] args, out LogLevel logLevel) {
+            //check for log-level
+            if (args != null && args.Length > 0) {
+                string level = args[0];
+                if (Enum.TryParse<LogLevel>(level, true, out logLevel)) {
+                    if (args.Length > 1) {
+                        string[] adj = new string[args.Length - 1];
+                        Array.Copy(args, 1, adj, 0, adj.Length);
+                        args = adj;
+                    } else {
+                        return args;
+                    }
+                } else {
+                    logLevel = LogLevel.Error;
+                }
+            } else {
+                logLevel = LogLevel.Error;
+            }
+            return args;
+        }
+
         public static ICommandAction Parse(string[] args) {
+            Program.Log.LogDebug("Parsing Args: [{0}].", String.Join("], [", args));
+            if (args != null && args.Length > 0) {
+                string action = args[0];
+                //parse for actions
+                if (Regex.Matches(action, @"alter", RegexOptions.IgnoreCase).Count > 0) {
+                    return new AlterAction();
+                } else if (Regex.Matches(action, @"copy|cp", RegexOptions.IgnoreCase).Count > 0) {
+                    return new CopyAction();
+                } else if (Regex.Matches(action, @"create|add|touch", RegexOptions.IgnoreCase).Count > 0) {
+                    return new CreateAction();
+                } else if (Regex.Matches(action, @"(--)?help|/\?", RegexOptions.IgnoreCase).Count > 0) {
+                    return new HelpAction();
+                } else if (Regex.Matches(action, @"list|ls", RegexOptions.IgnoreCase).Count > 0) {
+                    return new ListAction();
+                } else if (Regex.Matches(action, @"merge", RegexOptions.IgnoreCase).Count > 0) {
+                    return new MergeAction();
+                } else if (Regex.Matches(action, @"register|reg", RegexOptions.IgnoreCase).Count > 0) {
+                    return new RegisterAction();
+                } else if (Regex.Matches(action, @"remove|rm", RegexOptions.IgnoreCase).Count > 0) {
+                    return new RemoveAction();
+                }
+            }
             return null;
         }
 

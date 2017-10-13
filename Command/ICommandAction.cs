@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace GLS {
 
@@ -8,14 +9,16 @@ namespace GLS {
         Create,
         Alter,
         Remove,
-        Clear,
         Copy,
-        Merge
+        Merge,
+        Help
     }
 
     public interface ICommandAction {
 
         GLSAction Action { get; }
+
+        bool Run();
 
     }
 
